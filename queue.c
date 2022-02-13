@@ -1,5 +1,5 @@
-#include"queue.h"
-#include<stdio.h>
+#include "queue.h"
+#include <stdio.h>
 
 size = 0;
 
@@ -15,15 +15,15 @@ void heapify(int size, int i)
     if (size > 1)
     {
         int largest = i;
-        int l = 2 * i + 1;
-        int r = 2 * i + 2;
-        if (l < size && weights[l] > weights[largest])
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if (left < size && weights[left] > weights[largest])
         {
-            largest = l;
+            largest = left;
         }
-        if (r < size && weights[r] > weights[largest])
+        if (right < size && weights[right] > weights[largest])
         {
-            largest = r;
+            largest = right;
         }
         if (largest != i)
         {
