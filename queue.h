@@ -3,6 +3,7 @@
 
 struct queue;
 
+struct queue* createQueue();
 
 void swap(int* a, int* b);
 
