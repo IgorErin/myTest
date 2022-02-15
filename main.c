@@ -25,4 +25,7 @@ int main()
             break;
         }
     }
+
+    free(pToQueue);
+
 }
