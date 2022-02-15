@@ -4,17 +4,25 @@
 
 int main()
 {
-    enqueue(5, 5);
-    enqueue(4, 6);
-    enqueue(7, 4);
-    enqueue(1, 10);
-    enqueue(2, 9);
-    enqueue(3, 8);
-    enqueue(4, 7);
-    enqueue(8, 3);
+    struct queue* pToQueue = createQueue();
 
-    for (int i = 0; i < 8; i++)
+    enqueue(pToQueue, 5, 5);
+    enqueue(pToQueue, 4, 6);
+    enqueue(pToQueue, 7, 4);
+    enqueue(pToQueue, 1, 10);
+    enqueue(pToQueue, 2, 9);
+    enqueue(pToQueue, 3, 8);
+    enqueue(pToQueue, 4, 7);
+    enqueue(pToQueue, 8, 3);
+
+    int queueStatus = 0;
+
+    for (int i = 0; i < 10; i++)
     {
-        printf("%d ", dequeue());
+        printf("%d ", dequeue(pToQueue, &queueStatus));
+        if (queueStatus == 1)
+        {
+            break;
+        }
     }
 }

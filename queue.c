@@ -1,7 +1,14 @@
 #include "queue.h"
 #include <stdio.h>
 
-size = 0;
+
+struct queue
+{
+    int size;
+
+    int array[1000];
+    int weights[1000];
+};
 
 void swap(int* a, int* b)
 {
@@ -10,63 +17,73 @@ void swap(int* a, int* b)
     *a = temp;
 }
 
-void heapify(int size, int i)
+struct queue* createQueue()
 {
-    if (size > 1)
-    {
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        if (left < size && weights[left] > weights[largest])
-        {
-            largest = left;
-        }
-        if (right < size && weights[right] > weights[largest])
-        {
-            largest = right;
-        }
-        if (largest != i)
-        {
-            swap(&weights[i], &weights[largest]);
-            swap(&array[i], &array[largest]);
-            heapify(size, largest);
-        }
-    }
+    struct queue* pToNewQueue = (struct queue*)malloc(sizeof(struct queue));
+    pToNewQueue->size = 0;
+    return pToNewQueue;
 }
 
-void enqueue(int newNum, int weight)
+void heapify(struct queue * pToQueue, int size, int i)
 {
-    if (size == 0)
+    if (size <= 1)
     {
-        array[0] = newNum;
-        weights[0] = weight;
-        size += 1;
+        return;
     }
-    else
+    
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    if (left < size && pToQueue->weights[left] > pToQueue->weights[largest])
     {
-        array[size] = newNum;
-        weights[size] = weight;
-        size += 1;
-        for (int i = size / 2 - 1; i >= 0; i--)
-        {
-            heapify(size, i);
-        }
+        largest = left;
     }
+    if (right < size && pToQueue->weights[right] > pToQueue->weights[largest])
+    {
+        largest = right;
+    }
+    if (largest != i)
+    {
+        swap(&pToQueue->weights[i], &pToQueue->weights[largest]);
+        swap(&pToQueue->array[i], &pToQueue->array[largest]);
+        heapify(pToQueue, size, largest);
+    }
+  
 }
 
-int dequeue()
+void enqueue(struct queue* pToQueue, int newNum, int weight)
 {
-    if (size == 0)
+    if (pToQueue->size == 0)
     {
-        printf("ERROR! queue is empty\n");
+        pToQueue->array[0] = newNum;
+        pToQueue->weights[0] = weight;
+        pToQueue->size += 1;
+        return;
+    }
+    
+    pToQueue->array[pToQueue->size] = newNum;
+    pToQueue->weights[pToQueue->size] = weight;
+    pToQueue->size += 1;
+    for (int i = pToQueue->size / 2 - 1; i >= 0; i--)
+    {
+        heapify(pToQueue, pToQueue->size, i);
+    }
+    
+}
+
+int dequeue(struct queue* pToQueue, int * queueStatus)
+{
+    if (pToQueue->size == 0)
+    {
+        *queueStatus = 1;
         return 0;
     }
-    swap(&array[0], &array[size - 1]);
-    swap(&weights[0], &weights[size - 1]);
-    size -= 1;
-    for (int i = size / 2 - 1; i >= 0; i--)
+    swap(&pToQueue->array[0], &pToQueue->array[pToQueue->size - 1]);
+    swap(&pToQueue->weights[0], &pToQueue->weights[pToQueue->size - 1]);
+    pToQueue->size -= 1;
+    for (int i = pToQueue->size / 2 - 1; i >= 0; i--)
     {
-        heapify(size, i);
+        heapify(pToQueue, pToQueue->size, i);
     }
-    return array[size];
+    return pToQueue->array[pToQueue->size];
 }
