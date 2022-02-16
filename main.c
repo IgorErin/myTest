@@ -4,18 +4,18 @@
 
 int main()
 {
-    struct queue* pToQueue = createQueue();
-
-    enqueue(pToQueue, 5, 5);
-    enqueue(pToQueue, 4, 6);
-    enqueue(pToQueue, 7, 4);
-    enqueue(pToQueue, 1, 10);
-    enqueue(pToQueue, 2, 9);
-    enqueue(pToQueue, 3, 8);
-    enqueue(pToQueue, 4, 7);
-    enqueue(pToQueue, 8, 3);
+    Queue* pToQueue = createQueue();
 
     int queueStatus = 0;
+
+    enqueue(pToQueue, 5, 5, queueStatus);
+    enqueue(pToQueue, 4, 6, queueStatus);
+    enqueue(pToQueue, 7, 4, queueStatus);
+    enqueue(pToQueue, 1, 10, queueStatus);
+    enqueue(pToQueue, 2, 9, queueStatus);
+    enqueue(pToQueue, 3, 8, queueStatus);
+    enqueue(pToQueue, 4, 7, queueStatus);
+    enqueue(pToQueue, 8, 3, queueStatus);
 
     for (int i = 0; i < 10; i++)
     {

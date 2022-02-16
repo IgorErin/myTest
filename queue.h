@@ -1,16 +1,17 @@
 #ifndef QUEUE
 #define QUEUE
 
-struct queue;
+typedef struct StructQueue Queue;
 
-struct queue* createQueue();
+
+Queue* createQueue();
 
 void swap(int* a, int* b);
 
-void heapify(struct queue* pToQueue, int size, int i);
+void heapify(Queue* pToQueue, int size, int i);
 
-void enqueue(struct queue* pToQueue, int newNum, int weight);
+void enqueue(Queue* pToQueue, int newNum, int weight, int* queueStatus);
 
-int dequeue(struct queue* pToQueue, int* queueStatus);
+int dequeue(Queue* pToQueue, int* queueStatus);
 
 #endif
