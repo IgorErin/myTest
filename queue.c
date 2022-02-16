@@ -114,3 +114,10 @@ int dequeue(Queue* pToQueue, int * queueStatus)
     
     return pToQueue->array[pToQueue->size];
 }
+
+void delQueue(Queue* pToQueue)
+{
+    free(pToQueue->array);
+    free(pToQueue->weights);
+    free(pToQueue);
+}

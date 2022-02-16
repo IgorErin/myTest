@@ -14,4 +14,6 @@ void enqueue(Queue* pToQueue, int newNum, int weight, int* queueStatus);
 
 int dequeue(Queue* pToQueue, int* queueStatus);
 
+void delQueue(Queue* pToQueue);
+
 #endif

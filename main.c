@@ -26,5 +26,5 @@ int main()
         }
     }
 
-    free(pToQueue);
+    delQueue(pToQueue);
 }
